@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Comments {
+public class Comment {
     @Id
     private Integer id;
     private String text;
