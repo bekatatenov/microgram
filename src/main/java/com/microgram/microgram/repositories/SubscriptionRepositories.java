@@ -6,4 +6,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SubscriptionRepositories extends JpaRepository<Subscription, Integer> {
+
+    // find by id
+
+    // list of follows of User
+
+    // list of user's followers
 }

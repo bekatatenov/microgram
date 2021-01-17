@@ -7,4 +7,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LikeRepositories extends JpaRepository<Like, Integer> {
+    // findBy id of Post
+    // findBy date
+
+    // list of Users who liked the post
+    // count of likes List.size
 }
