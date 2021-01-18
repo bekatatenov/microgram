@@ -1,6 +1,7 @@
 package com.microgram.microgram.models;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,11 +15,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Post {
     @Id
     private Integer id;
 
-    @Column(name = "picPath")
+    @Column(name = "pic_path")
     private String pathPicture;
 
     @Column(name = "text")
@@ -30,9 +32,4 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userID")
     private User user;
-
-    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
-    private List<Like> likes;
-
-
 }
