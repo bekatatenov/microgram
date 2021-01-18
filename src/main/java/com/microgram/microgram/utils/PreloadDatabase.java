@@ -63,8 +63,42 @@ public class PreloadDatabase {
 
             postRepositories.saveAll(posts);
 
+            List<Comment> comments = getComments(commentRepositories, posts, users);
+            commentRepositories.saveAll(comments);
 
+            likeRepositories.deleteAll();
+
+            List<Like> likes = getLikes(users, posts, likeRepositories);
+            likeRepositories.saveAll(likes);
         };
+    }
+
+    private List<Like> getLikes(List<User> users, List<Post> posts, LikeRepositories likeRepositories) {
+        likeRepositories.deleteAll();
+        List<Like> likes = new ArrayList<>();
+        int count = 0;
+        for (int i = 0; i < posts.size(); i++) {
+            for (int j = 0; j < users.size(); j++) {
+                count++;
+                likes.add(new Like(count, users.get(j), posts.get(i), LocalDate.now()));
+            }
+        }
+        return likes;
+    }
+
+    private List<Comment> getComments(CommentRepositories commentRepositories, List<Post> posts, List<User> users) {
+        commentRepositories.deleteAll();
+        List<Comment> comments = new ArrayList<>();
+        int count = 0;
+
+        for (int i = 0; i < posts.size(); i++) {
+            for (int j = 0; j < users.size(); j++) {
+                count++;
+                comments.add(new Comment(count, posts.get(i),
+                        Generator.makeDescription(), LocalDate.now(), users.get(j)));
+            }
+        }
+        return comments;
     }
 
     private List<Post> getPosts(List<User> users, PostRepositories postRepositories) {
