@@ -4,21 +4,28 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
+
+@Entity
+@Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class User {
     @Id
     private Integer id;
-    private String userName;
+    @Column
+    private String login;
+    @Column
     private String email;
+    @Column
     private String password;
-    private int countOfPosts;
-    private List<User> myUsers;
-    private List<User> meUsers;
+    @Column
+    private Integer countOfPosts;
+    @Column
+    private Integer countOfFollowers;
+    @Column
+    private Integer countOfSubs;
 }
