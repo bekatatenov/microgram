@@ -25,10 +25,10 @@ public class PreloadDatabase {
                                    SubscriptionRepositories subscriptionRepositories,
                                    UserRepositories userRepositories) {
         return (args) -> {
-
+            likeRepositories.deleteAll();
             commentRepositories.deleteAll();
-
-
+            subscriptionRepositories.deleteAll();
+            postRepositories.deleteAll();
             userRepositories.deleteAll();
 
             List<User> users = new ArrayList<>();
@@ -39,8 +39,6 @@ public class PreloadDatabase {
                     .password("test1password")
                     .build()
             );
-
-            List<User> myUs = userRepositories.findAll();
             users.add(User.builder()
                     .id(2)
                     .login("Test2")
@@ -48,8 +46,6 @@ public class PreloadDatabase {
                     .password("test2password")
                     .build()
             );
-
-            List<User> all = userRepositories.findAll();
             users.add(User.builder()
                     .id(3)
                     .login("Test3")
@@ -59,22 +55,19 @@ public class PreloadDatabase {
             );
             userRepositories.saveAll(users);
 
-            List<Post> posts = getPosts(users, postRepositories);
+            List<Post> posts = getPosts(users);
 
             postRepositories.saveAll(posts);
 
-            List<Comment> comments = getComments(commentRepositories, posts, users);
+            List<Comment> comments = getComments(posts, users);
             commentRepositories.saveAll(comments);
 
-            likeRepositories.deleteAll();
-
-            List<Like> likes = getLikes(users, posts, likeRepositories);
+            List<Like> likes = getLikes(users, posts);
             likeRepositories.saveAll(likes);
         };
     }
 
-    private List<Like> getLikes(List<User> users, List<Post> posts, LikeRepositories likeRepositories) {
-        likeRepositories.deleteAll();
+    private List<Like> getLikes(List<User> users, List<Post> posts) {
         List<Like> likes = new ArrayList<>();
         int count = 0;
         for (int i = 0; i < posts.size(); i++) {
@@ -86,8 +79,7 @@ public class PreloadDatabase {
         return likes;
     }
 
-    private List<Comment> getComments(CommentRepositories commentRepositories, List<Post> posts, List<User> users) {
-        commentRepositories.deleteAll();
+    private List<Comment> getComments(List<Post> posts, List<User> users) {
         List<Comment> comments = new ArrayList<>();
         int count = 0;
 
@@ -101,8 +93,7 @@ public class PreloadDatabase {
         return comments;
     }
 
-    private List<Post> getPosts(List<User> users, PostRepositories postRepositories) {
-        postRepositories.deleteAll();
+    private List<Post> getPosts(List<User> users) {
         List<Post> posts = new ArrayList<>();
         Random rnd = new Random();
         int coutn = 1;
