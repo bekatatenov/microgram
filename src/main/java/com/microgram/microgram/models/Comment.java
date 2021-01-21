@@ -20,7 +20,6 @@ public class Comment {
     private Post post;
     private String text;
     private LocalDate date;
-
     @DBRef
     private User user;
 }

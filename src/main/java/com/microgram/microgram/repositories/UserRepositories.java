@@ -9,6 +9,4 @@ public interface UserRepositories extends MongoRepository<User, Integer> {
 
     // Find by id, username, email,
     // list of all users
-
-
 }

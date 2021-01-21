@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Document(collection = "posts")
@@ -23,4 +24,8 @@ public class Post {
     private LocalDate date;
     @DBRef
     private User user;
+    @DBRef
+    private List<Like> likes;
+    @DBRef
+    private List<Comment> comments;
 }
