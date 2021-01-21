@@ -1,29 +1,25 @@
 package com.microgram.microgram.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "subs")
+
+@Document(collection = "subs")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Subscription {
     @Id
     private Integer id;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fromUser")
+    @DBRef
     private User toUser;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "toUser")
+    @DBRef
     private User doUser;
-    @Column
     private LocalDate date;
 
 }

@@ -1,11 +1,11 @@
 package com.microgram.microgram.repositories;
 
 import com.microgram.microgram.models.Subscription;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SubscriptionRepositories extends JpaRepository<Subscription, Integer> {
+public interface SubscriptionRepositories extends MongoRepository<Subscription, Integer> {
 
     // find by id
 

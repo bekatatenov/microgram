@@ -1,35 +1,26 @@
 package com.microgram.microgram.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 
-@Entity
-@Table(name = "posts")
+@Document(collection = "posts")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Post {
     @Id
     private Integer id;
 
-    @Column(name = "pic_path")
     private String pathPicture;
 
-    @Column(name = "text")
     private String text;
-
-    @Column(name = "date")
     private LocalDate date;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userID")
+    @DBRef
     private User user;
 }

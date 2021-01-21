@@ -4,30 +4,24 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
-import java.util.List;
 
 
-@Entity
-@Table(name = "users")
+
+@Document(collection = "users")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
     private Integer id;
-    @Column
     private String login;
-    @Column
     private String email;
-    @Column
     private String password;
-    @Column
     private Integer countOfPosts;
-    @Column
     private Integer countOfFollowers;
-    @Column
     private Integer countOfSubs;
 }

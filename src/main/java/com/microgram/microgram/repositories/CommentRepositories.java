@@ -1,12 +1,12 @@
 package com.microgram.microgram.repositories;
 
 import com.microgram.microgram.models.Comment;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface CommentRepositories extends JpaRepository<Comment, Integer> {
+public interface CommentRepositories extends MongoRepository<Comment, Integer> {
 
     // add comment(save)
     // remake comment
