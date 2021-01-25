@@ -1,9 +1,6 @@
 package com.microgram.microgram.utils;
 
-import com.microgram.microgram.models.Comment;
-import com.microgram.microgram.models.Like;
-import com.microgram.microgram.models.Post;
-import com.microgram.microgram.models.User;
+import com.microgram.microgram.models.*;
 import com.microgram.microgram.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -55,18 +52,51 @@ public class PreloadDatabase {
                     .password("test3password")
                     .build()
             );
+            users.add(User.builder()
+                    .id(4)
+                    .name("John")
+                    .login("Test4")
+                    .email("test4@gmmail.com")
+                    .password("test4password")
+                    .build()
+            );
+            users.add(User.builder()
+                    .id(5)
+                    .name("Biden")
+                    .login("Test5")
+                    .email("test5@gmmail.com")
+                    .password("test5password")
+                    .build()
+            );
+
             userRepositories.saveAll(users);
 
+            List<Subscription> subs = getSubs(users);
+            subscriptionRepositories.saveAll(subs);
             List<Post> posts = getPosts(users);
-
             postRepositories.saveAll(posts);
-
             List<Comment> comments = getComments(posts, users);
             commentRepositories.saveAll(comments);
 
             List<Like> likes = getLikes(users, posts);
             likeRepositories.saveAll(likes);
         };
+    }
+
+    private List<Subscription> getSubs(List<User> users) {
+
+        List<Subscription> subscriptions = new ArrayList<>();
+        int count = 1;
+        Random rnd = new Random();
+        for (int i = 0; i < users.size(); i++) {
+            for (int j = 0; j < users.size(); j++) {
+                if (users.get(i) != users.get(j)) {
+                    subscriptions.add(new Subscription(count, users.get(i), users.get(j), LocalDate.now()));
+                }
+                count++;
+            }
+        }
+        return subscriptions;
     }
 
     private List<Like> getLikes(List<User> users, List<Post> posts) {
