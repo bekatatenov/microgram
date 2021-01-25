@@ -5,21 +5,18 @@ import com.microgram.microgram.models.User;
 import com.microgram.microgram.repositories.LikeRepositories;
 import com.microgram.microgram.repositories.PostRepositories;
 import com.microgram.microgram.repositories.UserRepositories;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Service
 public class LikeService {
     LikeRepositories likeRepositories;
     PostRepositories postRepositories;
     UserRepositories userRepositories;
 
-    public boolean isThereAnyLikeByUserAndPost(Integer postId, String userEmail) {
-        Optional<Post> post = postRepositories.findById(postId);
-        User user = userRepositories.findByEmail(userEmail);
-        return likeRepositories.existsByPostAndAndUser(post, user);
+    public boolean isThereAnyLikeByUserAndPost(Integer postId, Integer userId) {
+        User userById = userRepositories.findUserById(userId);
+        Post postById = postRepositories.findPostById(postId);
+        return likeRepositories.existsLikeByUserAndPost(userById, postById);
     }
 }

@@ -1,11 +1,11 @@
 package com.microgram.microgram.services;
 
 import com.microgram.microgram.repositories.CommentRepositories;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class CommentService {
 
     CommentRepositories commentRepositories;

@@ -2,11 +2,12 @@ package com.microgram.microgram.services;
 
 import com.microgram.microgram.models.User;
 import com.microgram.microgram.repositories.UserRepositories;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Service
 public class UserService {
     private final UserRepositories userRepositories;

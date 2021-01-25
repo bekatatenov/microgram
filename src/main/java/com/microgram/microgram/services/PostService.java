@@ -2,12 +2,12 @@ package com.microgram.microgram.services;
 
 import com.microgram.microgram.models.Post;
 import com.microgram.microgram.models.Subscription;
-import com.microgram.microgram.models.User;
 import com.microgram.microgram.repositories.PostRepositories;
 import com.microgram.microgram.repositories.SubscriptionRepositories;
 import com.microgram.microgram.repositories.UserRepositories;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +29,7 @@ public class PostService {
         return posts;
     }
 
-    public List<Post> findAllOthersPost(String email) {
-        User user = userRepositories.findByEmail(email);
-        List<Post> posts = postRepositories.findByUserNotContains(user);
-        return posts;
+    public List<Post> findAllOthersPost(Integer id) {
+        return postRepositories.findAllByUserId(id);
     }
 }

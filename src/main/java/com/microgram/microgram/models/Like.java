@@ -19,10 +19,8 @@ import java.time.LocalDate;
 public class Like {
     @Id
     private Integer id;
-
     @DBRef
     private User user;
-
     @DBRef
     private Post post;
 
