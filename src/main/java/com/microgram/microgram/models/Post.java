@@ -28,4 +28,12 @@ public class Post {
     private List<Like> likes;
     @DBRef
     private List<Comment> comments;
+
+    public Post(Integer id, String pathPicture, String text, LocalDate date, User user) {
+        this.id = id;
+        this.pathPicture = pathPicture;
+        this.text = text;
+        this.date = date;
+        this.user = user;
+    }
 }

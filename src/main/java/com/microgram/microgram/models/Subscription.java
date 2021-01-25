@@ -17,9 +17,9 @@ public class Subscription {
     @Id
     private Integer id;
     @DBRef
-    private User toUser;
+    private User user;
     @DBRef
-    private User doUser;
+    private User toUser;
     private LocalDate date;
 
 }

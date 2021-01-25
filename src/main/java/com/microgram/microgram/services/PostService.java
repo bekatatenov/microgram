@@ -1,30 +1,37 @@
 package com.microgram.microgram.services;
 
 import com.microgram.microgram.models.Post;
+import com.microgram.microgram.models.Subscription;
+import com.microgram.microgram.models.User;
 import com.microgram.microgram.repositories.PostRepositories;
-import lombok.RequiredArgsConstructor;
+import com.microgram.microgram.repositories.SubscriptionRepositories;
+import com.microgram.microgram.repositories.UserRepositories;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class PostService {
+    SubscriptionRepositories subscriptionRepositories;
     PostRepositories postRepositories;
+    UserRepositories userRepositories;
 
-    public List<Post> getPosts() {
-        // return all posts from db
-        return postRepositories.findAll();
+    public List<Post> findAllMySubPosts(Integer id) {
+        List<Subscription> allByUserId = subscriptionRepositories.findAllByUserId(id);
+        List<Post> posts = new ArrayList<>();
+        for (Subscription s :
+                allByUserId) {
+            List<Post> postsByUser = postRepositories.findAllByUserId(s.getToUser().getId());
+            posts.addAll(postsByUser);
+        }
+        return posts;
     }
 
-    public void savePost(Post post) {
-        postRepositories.save(post);
+    public List<Post> findAllOthersPost(String email) {
+        User user = userRepositories.findByEmail(email);
+        List<Post> posts = postRepositories.findByUserNotContains(user);
+        return posts;
     }
-
-    public void deletePost(Post post) {
-        postRepositories.delete(post);
-    }
-
-
-    // and there will method that will change post
 }

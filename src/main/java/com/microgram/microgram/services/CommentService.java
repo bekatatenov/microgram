@@ -9,8 +9,4 @@ import org.springframework.stereotype.Service;
 public class CommentService {
 
     CommentRepositories commentRepositories;
-
-    // method  find comments by post
-    // method  change comment by user and post
-    // delete comment
 }

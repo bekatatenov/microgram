@@ -33,6 +33,7 @@ public class PreloadDatabase {
             List<User> users = new ArrayList<>();
             users.add(User.builder()
                     .id(1)
+                    .name("David")
                     .login("Test1")
                     .email("test1@gmmail.com")
                     .password("test1password")
@@ -40,6 +41,7 @@ public class PreloadDatabase {
             );
             users.add(User.builder()
                     .id(2)
+                    .name("Anako")
                     .login("Test2")
                     .email("test2@gmmail.com")
                     .password("test2password")
@@ -47,6 +49,7 @@ public class PreloadDatabase {
             );
             users.add(User.builder()
                     .id(3)
+                    .name("beks")
                     .login("Test3")
                     .email("test3@gmmail.com")
                     .password("test3password")
@@ -105,4 +108,3 @@ public class PreloadDatabase {
         return posts;
     }
 }
-
