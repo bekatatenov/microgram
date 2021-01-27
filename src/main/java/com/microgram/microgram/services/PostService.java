@@ -28,7 +28,6 @@ public class PostService {
         }
         return posts;
     }
-
     public List<Post> findAllOthersPost(String id) {
         return postRepositories.findAllByUserId(id);
     }
