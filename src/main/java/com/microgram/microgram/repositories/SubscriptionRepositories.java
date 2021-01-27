@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SubscriptionRepositories extends MongoRepository<Subscription, Integer> {
-    List<Subscription> findAllByUserId(Integer id);
-    List<Subscription> findAllByToUserId(Integer id);
+public interface SubscriptionRepositories extends MongoRepository<Subscription, String> {
+    List<Subscription> findAllByUserId(String id);
+    List<Subscription> findAllByToUserId(String id);
 
 }

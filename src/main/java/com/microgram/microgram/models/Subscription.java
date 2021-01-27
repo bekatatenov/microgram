@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 
 @Document(collection = "subs")
@@ -15,11 +16,18 @@ import java.time.LocalDate;
 @Builder
 public class Subscription {
     @Id
-    private Integer id;
+    private String id;
     @DBRef
     private User user;
     @DBRef
     private User toUser;
     private LocalDate date;
 
+    public Subscription(User user, User toUser, LocalDate date) {
+        id = UUID.randomUUID().toString();
+        this.id = id;
+        this.user = user;
+        this.toUser = toUser;
+        this.date = date;
+    }
 }

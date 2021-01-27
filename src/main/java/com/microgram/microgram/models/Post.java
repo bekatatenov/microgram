@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 
 @Document(collection = "posts")
@@ -16,7 +17,7 @@ import java.util.List;
 @Builder
 public class Post {
     @Id
-    private Integer id;
+    private String id;
 
     private String pathPicture;
 
@@ -29,8 +30,8 @@ public class Post {
     @DBRef
     private List<Comment> comments;
 
-    public Post(Integer id, String pathPicture, String text, LocalDate date, User user) {
-        this.id = id;
+    public Post(String pathPicture, String text, LocalDate date, User user) {
+        id = UUID.randomUUID().toString();
         this.pathPicture = pathPicture;
         this.text = text;
         this.date = date;

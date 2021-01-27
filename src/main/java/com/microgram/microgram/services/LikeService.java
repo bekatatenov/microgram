@@ -14,7 +14,7 @@ public class LikeService {
     PostRepositories postRepositories;
     UserRepositories userRepositories;
 
-    public boolean isThereAnyLikeByUserAndPost(Integer postId, Integer userId) {
+    public boolean isThereAnyLikeByUserAndPost(String postId, String userId) {
         User userById = userRepositories.findUserById(userId);
         Post postById = postRepositories.findPostById(postId);
         return likeRepositories.existsLikeByUserAndPost(userById, postById);

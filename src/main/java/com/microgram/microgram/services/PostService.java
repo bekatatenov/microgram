@@ -18,7 +18,7 @@ public class PostService {
     PostRepositories postRepositories;
     UserRepositories userRepositories;
 
-    public List<Post> findAllMySubPosts(Integer id) {
+    public List<Post> findAllMySubPosts(String id) {
         List<Subscription> allByUserId = subscriptionRepositories.findAllByUserId(id);
         List<Post> posts = new ArrayList<>();
         for (Subscription s :
@@ -29,7 +29,7 @@ public class PostService {
         return posts;
     }
 
-    public List<Post> findAllOthersPost(Integer id) {
+    public List<Post> findAllOthersPost(String id) {
         return postRepositories.findAllByUserId(id);
     }
 }

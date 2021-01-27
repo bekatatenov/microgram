@@ -29,7 +29,6 @@ public class PreloadDatabase {
 
             List<User> users = new ArrayList<>();
             users.add(User.builder()
-                    .id(1)
                     .name("David")
                     .login("test1")
                     .email("test1@gmmail.com")
@@ -37,7 +36,6 @@ public class PreloadDatabase {
                     .build()
             );
             users.add(User.builder()
-                    .id(2)
                     .name("Anako")
                     .login("test2")
                     .email("test2@gmmail.com")
@@ -45,7 +43,6 @@ public class PreloadDatabase {
                     .build()
             );
             users.add(User.builder()
-                    .id(3)
                     .name("beks")
                     .login("test3")
                     .email("test3@gmmail.com")
@@ -53,7 +50,6 @@ public class PreloadDatabase {
                     .build()
             );
             users.add(User.builder()
-                    .id(4)
                     .name("John")
                     .login("test4")
                     .email("test4@gmmail.com")
@@ -61,7 +57,6 @@ public class PreloadDatabase {
                     .build()
             );
             users.add(User.builder()
-                    .id(5)
                     .name("Biden")
                     .login("test5")
                     .email("test5@gmmail.com")
@@ -86,14 +81,11 @@ public class PreloadDatabase {
     private List<Subscription> getSubs(List<User> users) {
 
         List<Subscription> subscriptions = new ArrayList<>();
-        int count = 1;
-        Random rnd = new Random();
         for (int i = 0; i < users.size(); i++) {
-            for (int j = 0; j < users.size(); j++) {
-                if (users.get(i) != users.get(j)) {
-                    subscriptions.add(new Subscription(count, users.get(i), users.get(j), LocalDate.now()));
+            for (User user : users) {
+                if (users.get(i) != user) {
+                    subscriptions.add(new Subscription(users.get(i), user, LocalDate.now()));
                 }
-                count++;
             }
         }
         return subscriptions;
@@ -101,11 +93,9 @@ public class PreloadDatabase {
 
     private List<Like> getLikes(List<User> users, List<Post> posts) {
         List<Like> likes = new ArrayList<>();
-        int count = 0;
-        for (int i = 0; i < posts.size(); i++) {
-            for (int j = 0; j < users.size(); j++) {
-                count++;
-                likes.add(new Like(count, users.get(j), posts.get(i), LocalDate.now()));
+        for (Post post : posts) {
+            for (User user : users) {
+                likes.add(new Like(user, post, LocalDate.now()));
             }
         }
         return likes;
@@ -113,13 +103,10 @@ public class PreloadDatabase {
 
     private List<Comment> getComments(List<Post> posts, List<User> users) {
         List<Comment> comments = new ArrayList<>();
-        int count = 0;
-
-        for (int i = 0; i < posts.size(); i++) {
-            for (int j = 0; j < users.size(); j++) {
-                count++;
-                comments.add(new Comment(count, posts.get(i),
-                        Generator.makeDescription(), LocalDate.now(), users.get(j)));
+        for (Post post : posts) {
+            for (User user : users) {
+                comments.add(new Comment(post,
+                        Generator.makeDescription(), LocalDate.now(), user));
             }
         }
         return comments;
@@ -128,11 +115,9 @@ public class PreloadDatabase {
     private List<Post> getPosts(List<User> users) {
         List<Post> posts = new ArrayList<>();
         Random rnd = new Random();
-        int coutn = 1;
         for (int i = 1; i <= users.size(); i++) {
             for (int j = 0; j < rnd.nextInt(5) + 1; j++) {
-                posts.add(new Post(coutn, "images/1pic.jpg", Generator.makeDescription(), LocalDate.now(), users.get(i - 1)));
-                coutn++;
+                posts.add(new Post("images/1pic.jpg", Generator.makeDescription(), LocalDate.now(), users.get(i - 1)));
             }
         }
         return posts;
