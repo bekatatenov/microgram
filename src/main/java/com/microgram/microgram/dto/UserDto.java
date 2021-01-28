@@ -30,4 +30,16 @@ public class UserDto {
                 .countOfSubs(user.getCountOfSubs())
                 .build();
     }
+    public static UserDto fromWithPassword(User user) {
+        return builder()
+                .id(user.getId())
+                .login(user.getLogin())
+                .email(user.getEmail())
+                .name(user.getName())
+                .password(user.getPassword())
+                .countOfPosts(user.getCountOfPosts())
+                .countOfFollowers(user.getCountOfFollowers())
+                .countOfSubs(user.getCountOfSubs())
+                .build();
+    }
 }

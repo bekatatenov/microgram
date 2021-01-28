@@ -15,4 +15,5 @@ public interface CommentRepositories extends MongoRepository<Comment, String> {
 
     Slice<Comment> findAllByPostId(Pageable pageable, String postId);
 
+    void deleteCommentsByPostId(String id);
 }

@@ -1,10 +1,11 @@
 package com.microgram.microgram.services;
 
+import com.microgram.microgram.dto.PostDto;
+import com.microgram.microgram.exception.ResourceNotFoundException;
 import com.microgram.microgram.models.Post;
 import com.microgram.microgram.models.Subscription;
-import com.microgram.microgram.repositories.PostRepositories;
-import com.microgram.microgram.repositories.SubscriptionRepositories;
-import com.microgram.microgram.repositories.UserRepositories;
+import com.microgram.microgram.models.User;
+import com.microgram.microgram.repositories.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,8 @@ public class PostService {
     SubscriptionRepositories subscriptionRepositories;
     PostRepositories postRepositories;
     UserRepositories userRepositories;
+    LikeRepositories likeRepositories;
+    CommentRepositories commentRepositories;
 
     public List<Post> findAllMySubPosts(String id) {
         List<Subscription> allByUserId = subscriptionRepositories.findAllByUserId(id);
@@ -28,7 +31,30 @@ public class PostService {
         }
         return posts;
     }
-    public List<Post> findAllOthersPost(String id) {
-        return postRepositories.findAllByUserId(id);
+
+    public List<PostDto> findPostsOfUser(String id) {
+        User user = userRepositories.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("There is no such a user with " + id + " id"));
+        List<Post> allByUserId = postRepositories.findAllByUserId(id);
+        List<PostDto> posts = new ArrayList<>();
+        for (Post p :
+                allByUserId) {
+            posts.add(PostDto.from(p));
+        }
+        return posts;
+    }
+
+    public PostDto addPost(PostDto postData, String userId) {
+        User user = userRepositories.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("There is no such a user with " + userId + " id"));
+        Post post = new Post(postData.getPathPicture(), postData.getText(), postData.getDate(), user);
+        return PostDto.from(post);
+    }
+
+    public boolean deletePost(String postId) {
+        likeRepositories.deleteLikesByPostId(postId);
+        commentRepositories.deleteCommentsByPostId(postId);
+        postRepositories.deleteById(postId);
+        return true;
     }
 }
