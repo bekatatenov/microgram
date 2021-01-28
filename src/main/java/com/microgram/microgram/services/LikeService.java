@@ -13,6 +13,8 @@ import com.microgram.microgram.repositories.UserRepositories;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @Service
 public class LikeService {
@@ -26,14 +28,14 @@ public class LikeService {
         return likeRepositories.existsLikeByUserAndPost(userById, postById);
     }
 
-    public LikeDto addLike(LikeDto likeData, String postId, String userId) {
+    public LikeDto addLike(String postId, String userId) {
 
         Post post = postRepositories.findById(postId)
                 .orElseThrow(() -> new ResourceNotFoundException("There is not such a post with " + postId + "id"));
         User user = userRepositories.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("There is no such a user with " + userId + " id"));
 
-        Like like = new Like(user, post, likeData.getDate());
+        Like like = new Like(user, post, LocalDate.now());
         return LikeDto.from(like);
     }
 
