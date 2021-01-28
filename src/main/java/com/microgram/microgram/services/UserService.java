@@ -2,6 +2,7 @@ package com.microgram.microgram.services;
 
 import com.microgram.microgram.dto.PostDto;
 import com.microgram.microgram.dto.UserDto;
+import com.microgram.microgram.exception.ThereIsSuchResourceFoundException;
 import com.microgram.microgram.models.User;
 import com.microgram.microgram.repositories.UserRepositories;
 import lombok.AllArgsConstructor;
@@ -43,6 +44,13 @@ public class UserService {
     }
 
     public UserDto addUser(User userData) {
+
+//        if (IsThereAnyUserByEmail(userData.getEmail())) {
+//            throw new ThereIsSuchResourceFoundException("There is a User with this email " + userData.getEmail());
+//        }
+//        if (isThereAnyUserByLogin(userData.getLogin())) {
+//            throw new ThereIsSuchResourceFoundException(("There is a User with this login" + userData.getLogin()));
+//        }
         User user = new User(userData.getLogin(), userData.getEmail(), userData.getName(), userData.getPassword());
         userRepositories.save(user);
         return UserDto.from(user);

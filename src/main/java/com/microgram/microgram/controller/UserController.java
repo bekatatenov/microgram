@@ -23,10 +23,10 @@ public class UserController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public UserDto addUser(@RequestBody User user) {
-        if (!userService.IsThereAnyUserByEmail(user.getEmail())) {
+        if (userService.IsThereAnyUserByEmail(user.getEmail())) {
             throw new ThereIsSuchResourceFoundException("There is a User with this email " + user.getEmail());
         }
-        if (!userService.isThereAnyUserByLogin(user.getLogin())) {
+        if (userService.isThereAnyUserByLogin(user.getLogin())) {
             throw new ThereIsSuchResourceFoundException(("There is a User with this login" + user.getLogin()));
         }
         return userService.addUser(user);
@@ -44,7 +44,7 @@ public class UserController {
 
     @GetMapping("/findUserByEmail")
     public UserDto findUserByEmail(@RequestParam("email") String email) {
-        return userService.findUserByLogin(email);
+        return userService.findUserByEmail(email);
     }
 
     @GetMapping("/{userId}")
@@ -52,7 +52,7 @@ public class UserController {
         return userService.findById(userId);
     }
 
-    @GetMapping("/{userId/posts}")
+    @GetMapping("/{userId}/posts")
     public List<PostDto> allPostsOfUser(@PathVariable String userId) {
         return postService.findPostsOfUser(userId);
     }

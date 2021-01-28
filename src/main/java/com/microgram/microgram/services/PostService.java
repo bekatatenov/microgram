@@ -20,6 +20,7 @@ public class PostService {
     UserRepositories userRepositories;
     LikeRepositories likeRepositories;
     CommentRepositories commentRepositories;
+    PostImageRepositories postImageRepositories;
 
     public List<Post> findAllMySubPosts(String id) {
         List<Subscription> allByUserId = subscriptionRepositories.findAllByUserId(id);
@@ -52,9 +53,11 @@ public class PostService {
     }
 
     public boolean deletePost(String postId) {
+        Post postById = postRepositories.findPostById(postId);
         likeRepositories.deleteLikesByPostId(postId);
         commentRepositories.deleteCommentsByPostId(postId);
         postRepositories.deleteById(postId);
+        postImageRepositories.deleteById(postById.getPostImage().getId());
         return true;
     }
 }

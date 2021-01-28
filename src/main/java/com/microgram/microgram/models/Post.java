@@ -21,6 +21,9 @@ public class Post {
 
     private String pathPicture;
 
+    @DBRef
+    private PostImage postImage;
+
     private String text;
     private LocalDate date;
     @DBRef
