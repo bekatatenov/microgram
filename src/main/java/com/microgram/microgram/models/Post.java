@@ -19,11 +19,8 @@ public class Post {
     @Id
     private String id;
 
-    private String pathPicture;
-
     @DBRef
     private PostImage postImage;
-
     private String text;
     private LocalDate date;
     @DBRef
@@ -33,9 +30,9 @@ public class Post {
     @DBRef
     private List<Comment> comments;
 
-    public Post(String pathPicture, String text, LocalDate date, User user) {
+    public Post(PostImage postImage, String text, LocalDate date, User user) {
         id = UUID.randomUUID().toString();
-        this.pathPicture = pathPicture;
+        this.postImage = postImage;
         this.text = text;
         this.date = date;
         this.user = user;

@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,10 +20,10 @@ public class PostController {
     @Autowired
     PostService postService;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public PostDto addPost(@RequestBody PostDto postData, Authentication authentication) {
+    @PostMapping()
+    public PostDto addPost(@RequestParam  String text, Authentication authentication, @RequestParam("file") MultipartFile file) {
         User user = (User) authentication.getPrincipal();
-        return postService.addPost(postData, user.getId());
+        return postService.addPost(text, user.getId(), file);
     }
 
     @DeleteMapping("/{postId}")

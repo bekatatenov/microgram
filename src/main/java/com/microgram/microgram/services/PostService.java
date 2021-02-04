@@ -3,12 +3,15 @@ package com.microgram.microgram.services;
 import com.microgram.microgram.dto.PostDto;
 import com.microgram.microgram.exception.ResourceNotFoundException;
 import com.microgram.microgram.models.Post;
+import com.microgram.microgram.models.PostImage;
 import com.microgram.microgram.models.Subscription;
 import com.microgram.microgram.models.User;
 import com.microgram.microgram.repositories.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,7 @@ public class PostService {
     LikeRepositories likeRepositories;
     CommentRepositories commentRepositories;
     PostImageRepositories postImageRepositories;
+    PostImageService postImageService;
 
     public List<Post> findAllMySubPosts(String id) {
         List<Subscription> allByUserId = subscriptionRepositories.findAllByUserId(id);
@@ -49,10 +53,13 @@ public class PostService {
         return posts;
     }
 
-    public PostDto addPost(PostDto postData, String userId) {
+    public PostDto addPost(String text, String userId, MultipartFile file) {
         User user = userRepositories.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("There is no such a user with " + userId + " id"));
-        Post post = new Post(postData.getPathPicture(), postData.getText(), postData.getDate(), user);
+
+        PostImage postImage = postImageService.addImage(file);
+        Post post = new Post(postImage, text, LocalDate.now(), user);
+        postRepositories.save(post);
         return PostDto.from(post);
     }
 
@@ -61,6 +68,7 @@ public class PostService {
         likeRepositories.deleteLikesByPostId(postId);
         commentRepositories.deleteCommentsByPostId(postId);
         postRepositories.deleteById(postId);
+        postImageRepositories.deleteById(postById.getPostImage().getId());
         return true;
     }
 }

@@ -2,11 +2,17 @@ package com.microgram.microgram.utils;
 
 import com.microgram.microgram.models.*;
 import com.microgram.microgram.repositories.*;
+import org.bson.types.Binary;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +26,15 @@ public class PreloadDatabase {
                                    LikeRepositories likeRepositories,
                                    PostRepositories postRepositories,
                                    SubscriptionRepositories subscriptionRepositories,
-                                   UserRepositories userRepositories) {
+                                   UserRepositories userRepositories,
+                                   PostImageRepositories postImageRepositories) {
         return (args) -> {
             likeRepositories.deleteAll();
             commentRepositories.deleteAll();
             subscriptionRepositories.deleteAll();
             postRepositories.deleteAll();
             userRepositories.deleteAll();
+            postImageRepositories.deleteAll();
 
             List<User> users = new ArrayList<>();
             users.add(User.builder()
@@ -69,7 +77,9 @@ public class PreloadDatabase {
 
             List<Subscription> subs = getSubs(users);
             subscriptionRepositories.saveAll(subs);
-            List<Post> posts = getPosts(users);
+            List<PostImage> postImages = getImages();
+            postImageRepositories.saveAll(postImages);
+            List<Post> posts = getPosts(users, postImages);
             postRepositories.saveAll(posts);
             List<Comment> comments = getComments(posts, users);
             commentRepositories.saveAll(comments);
@@ -128,14 +138,26 @@ public class PreloadDatabase {
         return comments;
     }
 
-    private List<Post> getPosts(List<User> users) {
+    private List<Post> getPosts(List<User> users, List<PostImage> postImages) {
         List<Post> posts = new ArrayList<>();
         Random rnd = new Random();
         for (int i = 1; i <= users.size(); i++) {
             for (int j = 0; j < rnd.nextInt(5) + 1; j++) {
-                posts.add(new Post("images/1pic.jpg", Generator.makeDescription(), LocalDate.now(), users.get(i - 1)));
+                posts.add(new Post(postImages.get(rnd.nextInt(3)), Generator.makeDescription(), LocalDate.now(), users.get(i - 1)));
             }
         }
         return posts;
+    }
+
+    private List<PostImage> getImages() throws IOException {
+        List<PostImage> postImages = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            String path = "src/main/resources/static/images/" + i + ".jpeg";
+            File file = new File(path);
+            byte[] bytes = Files.readAllBytes(file.toPath());
+            Binary bData = new Binary(bytes);
+            postImages.add(PostImage.builder().id(String.valueOf(i)).postData(bData).build());
+        }
+        return postImages;
     }
 }

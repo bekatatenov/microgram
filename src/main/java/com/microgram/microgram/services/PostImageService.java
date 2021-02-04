@@ -1,11 +1,10 @@
 package com.microgram.microgram.services;
 
 
-import com.microgram.microgram.dto.PostDto;
-import com.microgram.microgram.dto.PostImageDto;
 import com.microgram.microgram.exception.ResourceNotFoundException;
 import com.microgram.microgram.models.PostImage;
 import com.microgram.microgram.repositories.PostImageRepositories;
+import com.microgram.microgram.repositories.PostRepositories;
 import org.bson.types.Binary;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -17,12 +16,15 @@ import java.io.IOException;
 @Service
 public class PostImageService {
     public final PostImageRepositories postImageRepositories;
+    public final PostRepositories postRepositories;
 
-    public PostImageService(PostImageRepositories postImageRepositories) {
+
+    public PostImageService(PostImageRepositories postImageRepositories, PostRepositories postRepositories) {
         this.postImageRepositories = postImageRepositories;
+        this.postRepositories = postRepositories;
     }
 
-    public PostImageDto addImage(MultipartFile file) {
+    public PostImage addImage(MultipartFile file) {
         byte[] data = new byte[0];
         try {
             data = file.getBytes();
@@ -30,7 +32,7 @@ public class PostImageService {
             e.printStackTrace();
         }
 
-        if (data.length == 0) {
+        if (data.length<1) {
             throw new IllegalArgumentException();
             // TODO return no content or something or throw exception
             //  which will be processed on controller layer
@@ -38,12 +40,8 @@ public class PostImageService {
 
         Binary bData = new Binary(data);
         PostImage image = PostImage.builder().postData(bData).build();
-
         postImageRepositories.save(image);
-
-        return PostImageDto.builder()
-                .imageId(image.getId())
-                .build();
+        return image;
     }
     public Resource getById(String imageId) {
         PostImage postImage = postImageRepositories.findById(imageId)

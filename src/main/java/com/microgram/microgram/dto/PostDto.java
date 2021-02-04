@@ -19,18 +19,17 @@ import java.util.List;
 
 public class PostDto {
     private String id;
-    private String pathPicture;
+    private String postImageId;
     private String text;
     private LocalDate date;
     private User user;
     private List<Like> likes;
     private List<Comment> comments;
 
-    public static  PostDto from(Post post)
-    {
+    public static PostDto from(Post post) {
         return builder()
                 .id(post.getId())
-                .pathPicture(post.getPathPicture())
+                .postImageId(post.getPostImage().getId())
                 .text(post.getText())
                 .date(post.getDate())
                 .user(post.getUser())
