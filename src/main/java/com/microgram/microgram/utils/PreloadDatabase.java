@@ -5,6 +5,7 @@ import com.microgram.microgram.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,35 +33,35 @@ public class PreloadDatabase {
                     .name("David")
                     .login("test1")
                     .email("test1@gmmail.com")
-                    .password("test1password")
+                    .password(new BCryptPasswordEncoder().encode("test1"))
                     .build()
             );
             users.add(User.builder()
                     .name("Anako")
                     .login("test2")
                     .email("test2@gmmail.com")
-                    .password("test2password")
+                    .password(new BCryptPasswordEncoder().encode("test2"))
                     .build()
             );
             users.add(User.builder()
                     .name("beks")
                     .login("test3")
                     .email("test3@gmmail.com")
-                    .password("test3password")
+                    .password(new BCryptPasswordEncoder().encode("test3"))
                     .build()
             );
             users.add(User.builder()
                     .name("John")
                     .login("test4")
                     .email("test4@gmmail.com")
-                    .password("test4password")
+                    .password(new BCryptPasswordEncoder().encode("test4"))
                     .build()
             );
             users.add(User.builder()
                     .name("Biden")
                     .login("test5")
                     .email("test5@gmmail.com")
-                    .password("test5password")
+                    .password(new BCryptPasswordEncoder().encode("test5"))
                     .build()
             );
 
@@ -75,6 +76,21 @@ public class PreloadDatabase {
 
             List<Like> likes = getLikes(users, posts);
             likeRepositories.saveAll(likes);
+            users.add(User.builder()
+                    .name("olol")
+                    .login("test6")
+                    .email("test6@gmmail.com")
+                    .password(new BCryptPasswordEncoder().encode("test6"))
+                    .build()
+            );
+            users.add(User.builder()
+                    .name("mololo")
+                    .login("test7")
+                    .email("test7@gmmail.com")
+                    .password(new BCryptPasswordEncoder().encode("test1"))
+                    .build()
+            );
+            userRepositories.saveAll(users);
         };
     }
 

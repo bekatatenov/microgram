@@ -49,9 +49,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .fullyAuthenticated()
                 .antMatchers(HttpMethod.POST, "/likes/**")
                 .fullyAuthenticated()
-                .antMatchers(HttpMethod.DELETE,"/comments/**")
+                .antMatchers(HttpMethod.DELETE, "/comments/**")
                 .fullyAuthenticated()
-                .antMatchers(HttpMethod.POST,"/comments/**")
+                .antMatchers(HttpMethod.POST, "/comments/**")
                 .fullyAuthenticated();
 
         // Правило 2: Разрешить всё остальные запросы

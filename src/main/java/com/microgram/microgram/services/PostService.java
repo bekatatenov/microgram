@@ -34,7 +34,7 @@ public class PostService {
     }
 
     public Post findById(String id) {
-        return postRepositories.findById(id).orElseThrow(()->new ResourceNotFoundException("There is no such post"));
+        return postRepositories.findById(id).orElseThrow(() -> new ResourceNotFoundException("There is no such post"));
     }
 
     public List<PostDto> findPostsOfUser(String id) {
@@ -61,7 +61,6 @@ public class PostService {
         likeRepositories.deleteLikesByPostId(postId);
         commentRepositories.deleteCommentsByPostId(postId);
         postRepositories.deleteById(postId);
-        postImageRepositories.deleteById(postById.getPostImage().getId());
         return true;
     }
 }
