@@ -31,7 +31,6 @@ public class UserController {
         }
         return userService.addUser(user);
     }
-
     @GetMapping("/findUserByName")
     public List<UserDto> findUsersByName(@RequestParam("name") String name) {
         return userService.findUserByName(name);
@@ -50,10 +49,5 @@ public class UserController {
     @GetMapping("/{userId}")
     public UserDto findUserById(@PathVariable String userId) {
         return userService.findById(userId);
-    }
-
-    @GetMapping("/{userId}/posts")
-    public List<PostDto> allPostsOfUser(@PathVariable String userId) {
-        return postService.findPostsOfUser(userId);
     }
 }

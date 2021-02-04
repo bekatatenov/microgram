@@ -33,6 +33,10 @@ public class PostService {
         return posts;
     }
 
+    public Post findById(String id) {
+        return postRepositories.findById(id).orElseThrow(()->new ResourceNotFoundException("There is no such post"));
+    }
+
     public List<PostDto> findPostsOfUser(String id) {
         User user = userRepositories.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("There is no such a user with " + id + " id"));

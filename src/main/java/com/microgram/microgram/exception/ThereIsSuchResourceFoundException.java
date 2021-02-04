@@ -1,7 +1,6 @@
 package com.microgram.microgram.exception;
 
 public class ThereIsSuchResourceFoundException extends RuntimeException {
-
     public ThereIsSuchResourceFoundException() {
         super();
     }

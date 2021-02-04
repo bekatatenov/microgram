@@ -31,4 +31,9 @@ public class SubscriptionService {
         subscriptionRepositories.deleteById(subscriptionId);
         return true;
     }
+
+    public Subscription findById(String id) {
+        return subscriptionRepositories.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("There is not suck subs"));
+    }
 }

@@ -43,4 +43,9 @@ public class LikeService {
         likeRepositories.deleteById(likeId);
         return true;
     }
+    public Like findById(String id)
+    {
+      return likeRepositories.findById(id).orElseThrow(()->
+                new ResourceNotFoundException("There is not suck like"));
+    }
 }

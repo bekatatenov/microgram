@@ -41,4 +41,8 @@ public class CommentService {
         commentRepositories.deleteById(commentId);
         return true;
     }
+    public Comment findById(String id) {
+        return commentRepositories.findById(id).orElseThrow(()->
+                new ResourceNotFoundException("There is no such comment"));
+    }
 }

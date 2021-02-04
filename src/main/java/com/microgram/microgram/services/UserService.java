@@ -6,6 +6,9 @@ import com.microgram.microgram.exception.ThereIsSuchResourceFoundException;
 import com.microgram.microgram.models.User;
 import com.microgram.microgram.repositories.UserRepositories;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,7 +17,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     private final UserRepositories userRepositories;
 
     public List<UserDto> findUserByName(String name) {
@@ -32,7 +35,7 @@ public class UserService {
     }
 
     public UserDto findUserByEmail(String email) {
-        return UserDto.from(userRepositories.findByEmail(email));
+        return UserDto.from(userRepositories.findByEmail(email).get());
     }
 
     public boolean IsThereAnyUserByEmail(String email) {
@@ -63,5 +66,12 @@ public class UserService {
 
     public UserDto findById(String id) {
         return UserDto.from(userRepositories.findUserById(id));
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return (UserDetails) userRepositories.findByEmail(s)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(String.format("user with email %s not found", s)));
     }
 }
