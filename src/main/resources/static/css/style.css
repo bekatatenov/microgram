@@ -1,0 +1,157 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+.postContr {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.post {
+    margin-top: 30px;
+    border: solid 1px darkgray;
+    border-radius: 10px;
+}
+
+.poisk {
+    padding-left: 200px;
+}
+
+.icons {
+    padding-left: 200px;
+    font-size: 20px;
+}
+
+.container {
+    background: white;
+}
+
+.header {
+    background: #f8f9fa;
+}
+
+.posHeader {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.photo__user-info {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    text-align: left;
+}
+
+.photo__avatar {
+    width: 32px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 15px;
+}
+
+.photo__author {
+    font-weight: bold;
+}
+
+.postBody {
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+.underPhoto {
+    padding: 5px;
+}
+
+.like {
+    background: none;
+    font-size: 30px;
+}
+
+.savePost {
+    margin-left: 525px;
+}
+
+.photo__comment {
+    margin-bottom: 10px;
+}
+
+.photo__comments .photo__comment-author {
+    font-weight: 600;
+}
+
+li {
+    list-style: none;
+}
+
+.newComment {
+    padding-right: 300px;
+}
+
+.postFooter {
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+}
+
+.buttonComment {
+    border: none;
+    background: none;
+    color: #56a8e7;
+}
+
+.test {
+    padding: 50px;
+}
+
+.btnSplash {
+    position: absolute;
+    display: flex;
+    top: 50px;
+    left: 10px;
+    /*bottom: 15px; !* Положение от нижнего края *!*/
+    /*right: 15px; !* Положение от правого края *!*/
+    /*line-height: 1px;*/
+}
+
+.btnSplashTwo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background: black;
+    opacity: 80%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.btnOs {
+    padding: 50px;
+}
+
+.scroll {
+    overflow: hidden;
+}
+
+.colorForHeart {
+    color: red;
+}
+
+.gif {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    opacity: 50%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 60px;
+}
