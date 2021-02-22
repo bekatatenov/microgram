@@ -85,7 +85,11 @@ function addCom() {
 }
 
 function addPos() {
-    const post = new Post(1, "New Yourk", "./images/newPost.jpg", Date.now(), user);
+
+    const form = document.getElementsByClassName("postAddingForm")[0];
+    const elements = form.elements;
+
+    let post = new Post("1", elements['desc'].value, "./images/newPost.jpg", Date.now(), user);
     posts.push(post);
     const postElem = createPostElement(post);
     addPost(postElem);
@@ -101,6 +105,18 @@ function changeStatusLike(heart) {
         heart.classList.remove('fas');
         heart.classList.add('far');
         heart.classList.remove('colorForHeart');
+    }
+}
+
+function addCommentHtml() {
+
+    document.getElementsByClassName('po')
+
+
+    if (comment.classList.contains('unshow')) {
+        comment.classList.remove('unshow')
+    } else {
+        comment.classList.add('unshow');
     }
 }
 
@@ -171,11 +187,15 @@ function createPostElement(post) {
                                                                                   href="https://www.instagram.com/zuck/?hl=ru">Zuck</a> and others </span>
                 </p>
             </div>
+            <div class="desc">
+            Desc: ${post.text}
+</div>
             <div>
                 <ul id="comment" class="photo__comments">
                 </ul>
 
             </div>
+      
             <div class="postFooter">
                 <form><label>
                     <input id="newComment" class="newComment" placeholder="new Comment" type="text" name="newComment">
@@ -189,6 +209,10 @@ function createPostElement(post) {
     return newPostHtml;
 }
 
+function adaddCommentArea() {
+    const commentArea = document.getElementsByClassName('postFooter');
+
+}
 
 function startNewFor() {
 
@@ -198,10 +222,18 @@ function startNewFor() {
 
     let bookmakerFromFront = document.getElementsByClassName('fa-bookmark');
 
+    let commentFromFront = document.getElementsByClassName('fa-comment');
+
     for (let i = 0; i < bookmakerFromFront.length; i++) {
         bookmakerFromFront[i].addEventListener('click', function () {
             changeStatusLike(bookmakerFromFront[i])
         })
+    }
+
+    for (let i = 0; i < commentFromFront.length; i++) {
+        commentFromFront[i].addEventListener('click', function () {
+            adaddCommentArea();
+        });
     }
 
     for (let i = 0; i < likesFromFront.length; i++) {
@@ -213,6 +245,7 @@ function startNewFor() {
     for (let i = 0; i < postsFromFront.length; i++) {
         let postPhotos = postsFromFront[i].getElementsByClassName('postPhoto');
         let like = postsFromFront[i].getElementsByClassName('heartss')[0];
+
         for (let j = 0; j < postPhotos.length; j++) {
             postPhotos[j].addEventListener("dblclick", function () {
                 changeStatusLike(like)
@@ -232,3 +265,18 @@ function startNewFor() {
 }
 
 startNewFor();
+
+const newPostForm = document.getElementById("newPostId");
+
+async function newPostHandler(e) {
+    e.preventDefault();
+    const form = e.target;
+    addPos();
+    const data = new FormData(form);
+    await fetch('http://127.0.0.1:9999/posts', {
+        method: 'POST',
+        body: data
+    });
+}
+
+newPostForm.addEventListener('submit', newPostHandler);

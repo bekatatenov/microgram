@@ -6,9 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./fonts/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="fonts/fontawesome/css/all.min.css">
     <title>Microgram</title>
 </head>
 <body class="scroll">
@@ -18,7 +18,7 @@
         <div class="container-fluid">
 
             <a class="navbar-brand" href="#">
-                <img src="./images/log.png" alt="logo" width="155" height="44">
+                <img src="images/log.png" alt="logo" width="155" height="44">
             </a>
             <form class="d-flex poisk">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -51,14 +51,64 @@
 </div>
 
 <div id="splash" class="btnSplashTwo">
-    <button class="btn btn-primary btnOs"  onclick="hideSplashScreen()"> Войдите </button>
+    <button class="btn btn-primary btnOs" onclick="hideSplashScreen()"> Войдите</button>
 </div>
 
 <main>
+
+
+    <div class="postContr">
+        <!-- Button to Open the Modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Add new Post Form
+        </button>
+
+
+        <!-- The Modal -->
+        <form id="newPostId" class="postAddingForm" enctype="multipart/form-data">
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">New Post Form</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div>
+                                <label for="imageForForm" class="custom-file-upload">Upload Image</label>
+                                <input type="file" name="image" id="imageForForm" class="form-control" required
+                                       accept="image/*">
+                            </div>
+                            <div>
+                                <input type="hidden" name="idUser" value="1">
+                            </div>
+                            <div>
+                                <label for="desc">Description</label>
+                                <textarea class="form-control textarea" id="desc" name="desc" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Modal footer -->
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
     <div id="posts" class="post-container">
         <div id="post" class="postContr post">
             <div class="posHeader photo photo__header">
-                <img src="./images/avatar.jpg" class="photo__avatar" alt="Avatar of User"/>
+                <img src="images/avatar.jpg" class="photo__avatar" alt="Avatar of User"/>
                 <div class="photo__user-info">
                     <span class="photo__author">Anako</span>
                     <span class="photo__location">Black Rock City</span>
@@ -66,7 +116,7 @@
             </div>
 
             <div class="postPhoto">
-                <img src="./images/pos.jpg" alt="postPhoto" width="700" height="700">
+                <img src="images/pos.jpg" alt="postPhoto" width="700" height="700">
             </div>
 
             <div class="postBody">
@@ -82,6 +132,10 @@
                 <p style="padding: 10px">Likes <span style="font-weight: bold"><a style="text-decoration: none"
                                                                                   href="https://www.instagram.com/zuck/?hl=ru">Zuck</a> and others </span>
                 </p>
+            </div>
+
+            <div class="desc" style="padding-left: 30px">
+                <p>Desc:</p>
             </div>
             <div>
                 <ul id="comment" class="photo__comments">
@@ -102,7 +156,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="postFooter">
+            <div class="postFooter unshow">
                 <form><label>
                     <input id="newComment" class="newComment" placeholder="new Comment" type="text" name="newComment">
                 </label>
@@ -115,15 +169,15 @@
     </div>
 </main>
 
-<div id="addPost" class="postContr">
-    <button class="btn btn-primary post" onclick="addPos()"> New Post</button>
-</div>
+<!--<div id="addPost" class="postContr">-->
+<!--    <button class="btn btn-primary post" onclick="addPos()"> New Post</button>-->
+<!--</div>-->
 
 
-<script src="./js/jquery-3.2.1.slim.min.js"></script>
-<script src="./js/popper.min.js"></script>
-<script src="./js/bootstrap.min.js"></script>
-<script src="./js/script.js"></script>
+<script src="js/jquery-3.2.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/script.js"></script>
 
 <!--<script>-->
 <!--    $('.modal').on('shown.bs.modal', function () {-->

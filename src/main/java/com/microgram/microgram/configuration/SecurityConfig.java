@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends  WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserService userService;
@@ -42,7 +42,7 @@ public class SecurityConfig extends  WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/images/**")
                 .fullyAuthenticated()
                 .antMatchers(HttpMethod.POST, "/posts/**")
-                .fullyAuthenticated()
+                .permitAll()
                 .antMatchers(HttpMethod.DELETE, "/posts/**")
                 .fullyAuthenticated()
                 .antMatchers(HttpMethod.DELETE, "/likes/**")

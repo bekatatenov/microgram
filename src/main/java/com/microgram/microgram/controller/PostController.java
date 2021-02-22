@@ -3,9 +3,10 @@ package com.microgram.microgram.controller;
 import com.microgram.microgram.dto.PostDto;
 import com.microgram.microgram.models.Post;
 import com.microgram.microgram.models.User;
+import com.microgram.microgram.repositories.UserRepositories;
 import com.microgram.microgram.services.PostService;
+import com.microgram.microgram.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +21,24 @@ public class PostController {
     @Autowired
     PostService postService;
 
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    UserRepositories userRepositories;
+
     @PostMapping()
-    public PostDto addPost(@RequestParam  String text, Authentication authentication, @RequestParam("file") MultipartFile file) {
-        User user = (User) authentication.getPrincipal();
-        return postService.addPost(text, user.getId(), file);
+    public ResponseEntity addPost(@RequestParam("desc") String desc, @RequestParam("image") MultipartFile image) {
+        try {
+//            User user = (User) authentication.getPrincipal();
+            User user = new User("jsTest", "js@test.com", "js", "js");
+            userRepositories.save(user);
+            postService.addPost(desc, user.getId(), image);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
     @DeleteMapping("/{postId}")
