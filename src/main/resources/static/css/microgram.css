@@ -1,0 +1,14 @@
+.header {
+    padding-left: 130px;
+    font-size: 20px;
+    max-width: 100%;
+    background: #f8f9fa;
+}
+
+.headerSearch {
+    padding-left: 200px;
+}
+
+.headerNavBar {
+    padding-left: 200px;
+}
