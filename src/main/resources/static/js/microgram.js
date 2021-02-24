@@ -1,7 +1,7 @@
 'use strict'
 
 class User {
-    constructor(id, login, email, name, password, posts, subers, subs, isAuthorised) {
+    constructor(id, login, email, name, password, posts, subers, subs, isAuthorized) {
         this.id = id;
         this.login = login;
         this.email = email;
@@ -9,7 +9,7 @@ class User {
         this.posts = posts;
         this.subers = subers;
         this.subs = subs;
-        this.isAuthorised = isAuthorised;
+        this.isAuthorised = isAuthorized;
     }
 
 }
@@ -34,4 +34,27 @@ class Comment {
         this.date = data;
         this.user = user;
     }
+}
+
+class Like {
+    constructor(id, post, user, date) {
+        this.id = id;
+        this.post = post;
+        this.user = user;
+        this.date = date;
+    }
+}
+
+let posts = [];
+
+function addPostToArrayPosts(post) {
+    posts.push(post);
+}
+
+function isUserAuth(user) {
+    return user.isAuthorized;
+}
+
+function changeAuthOfUser(user) {
+    user.isAuthorized = !user.isAuthorized;
 }
