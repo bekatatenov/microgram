@@ -146,10 +146,17 @@ function addEventForImage() {
     });
 }
 
+function newEvents() {
+    var main = document.getElementsByClassName('postsss');
+
+
+}
+
+
 function addPost(postElem) {
     let inIT = document.getElementById("posts");
     inIT.appendChild(postElem);
-    startNewFor();
+    newEvents();
 }
 
 function createPostElement(post) {
@@ -209,11 +216,6 @@ function createPostElement(post) {
     return newPostHtml;
 }
 
-function adaddCommentArea() {
-    const commentArea = document.getElementsByClassName('postFooter');
-
-}
-
 function startNewFor() {
 
     let likesFromFront = document.getElementsByClassName('heartss');
@@ -230,9 +232,12 @@ function startNewFor() {
         })
     }
 
+
     for (let i = 0; i < commentFromFront.length; i++) {
         commentFromFront[i].addEventListener('click', function () {
-            adaddCommentArea();
+            if (document.getElementsByClassName('unshow').length === 1) {
+                changeStatusLike(commentFromFront[i])
+            }
         });
     }
 

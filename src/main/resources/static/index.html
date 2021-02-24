@@ -54,7 +54,7 @@
     <button class="btn btn-primary btnOs" onclick="hideSplashScreen()"> Войдите</button>
 </div>
 
-<main>
+<main class="main">
 
 
     <div class="postContr">
@@ -84,7 +84,7 @@
                                        accept="image/*">
                             </div>
                             <div>
-                                <input type="hidden" name="idUser" value="1">
+                                <input type="hidden" name="idUser" value="${user.id}}">
                             </div>
                             <div>
                                 <label for="desc">Description</label>
@@ -104,66 +104,77 @@
         </form>
     </div>
 
-
-    <div id="posts" class="post-container">
-        <div id="post" class="postContr post">
-            <div class="posHeader photo photo__header">
-                <img src="images/avatar.jpg" class="photo__avatar" alt="Avatar of User"/>
-                <div class="photo__user-info">
-                    <span class="photo__author">Anako</span>
-                    <span class="photo__location">Black Rock City</span>
+    <div class="postsss">
+        <div id="posts" class="post-container">
+            <div id="post" class="postContr post">
+                <div class="posHeader photo photo__header">
+                    <img src="images/avatar.jpg" class="photo__avatar" alt="Avatar of User"/>
+                    <div class="photo__user-info">
+                        <span class="photo__author">Anako</span>
+                        <span class="photo__location">Black Rock City</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="postPhoto">
-                <img src="images/pos.jpg" alt="postPhoto" width="700" height="700">
-            </div>
+                <div class="postPhoto">
+                    <img src="images/pos.jpg" alt="postPhoto" width="700" height="700">
+                </div>
 
-            <div class="postBody">
+                <div class="postBody">
 
-                <i class="far fa-heart heartss underPhoto"></i>
-                <i class="far fa-comment underPhoto"></i>
-                <i class="far fa-paper-plane underPhoto "></i>
-                <i class="far fa-bookmark savePost underPhoto"></i>
+                    <i class="far fa-heart heartss underPhoto"></i>
+                    <i class="far fa-comment underPhoto"></i>
+                    <i class="far fa-paper-plane underPhoto "></i>
+                    <i class="far fa-bookmark savePost underPhoto"></i>
 
-            </div>
+                </div>
 
-            <div>
-                <p style="padding: 10px">Likes <span style="font-weight: bold"><a style="text-decoration: none"
-                                                                                  href="https://www.instagram.com/zuck/?hl=ru">Zuck</a> and others </span>
-                </p>
-            </div>
+                <div>
+                    <p style="padding: 10px">Likes <span style="font-weight: bold"><a style="text-decoration: none"
+                                                                                      href="https://www.instagram.com/zuck/?hl=ru">Zuck</a> and others </span>
+                    </p>
+                </div>
 
-            <div class="desc" style="padding-left: 30px">
-                <p>Desc:</p>
-            </div>
-            <div>
-                <ul id="comment" class="photo__comments">
-                    <li class="photo__comment">
-                        <span class="photo__comment-author">Putin V</span> Where are you?
-                    </li>
-                    <li class="photo__comment">
-                        <span class="photo__comment-author">Navalny</span> Salam Aleykum!
-                    </li>
-                    <li class="photo__comment">
-                        <span class="photo__comment-author">Sooronbai Zheenbekov</span> О! Соотечественники
-                    </li>
-                    <li class="photo__comment">
-                        <span class="photo__comment-author">Sadyr Zhaparov</span> @zheenbekov аххаха
-                    </li>
-                    <li class="photo__comment">
-                        <span class="photo__comment-author">Putin V</span> @zhaparov ahahah
-                    </li>
-                </ul>
-            </div>
-            <div class="postFooter unshow">
-                <form><label>
-                    <input id="newComment" class="newComment" placeholder="new Comment" type="text" name="newComment">
-                </label>
-                    <label>
-                        <input class="buttonComment" value="Comment" onclick="addCom()">
-                    </label>
-                </form>
+                <div class="desc" style="padding-left: 30px">
+                    <p>Desc:</p>
+                </div>
+                <div>
+                    <ul id="comment" class="photo__comments">
+                        <li class="photo__comment">
+                            <span class="photo__comment-author">Putin V</span> Where are you?
+                        </li>
+                        <li class="photo__comment">
+                            <span class="photo__comment-author">Navalny</span> Salam Aleykum!
+                        </li>
+                        <li class="photo__comment">
+                            <span class="photo__comment-author">Sooronbai Zheenbekov</span> О! Соотечественники
+                        </li>
+                        <li class="photo__comment">
+                            <span class="photo__comment-author">Sadyr Zhaparov</span> @zheenbekov аххаха
+                        </li>
+                        <li class="photo__comment">
+                            <span class="photo__comment-author">Putin V</span> @zhaparov ahahah
+                        </li>
+                    </ul>
+                </div>
+                <div class="postFooter">
+                    <form id=newCommentForm>
+
+                        <label>
+                            <input id="newComment" class="newComment" placeholder="new Comment" type="text"
+                                   name="newComment">
+                        </label>
+                        <div>
+                            <input type="hidden" name="idUser" value="${user.id}}">
+                        </div>
+                        <div>
+                            <input type="hidden" name="idPost" value="${post.id}}">
+                        </div>
+                        <label>
+                            <input class="buttonComment" value="Comment" onclick="addCom()">
+                        </label>
+                    </form>
+
+                </div>
             </div>
         </div>
     </div>
