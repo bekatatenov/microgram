@@ -26,7 +26,7 @@
             </form>
 
             <div class="collapse navbar-collapse headerNavBar" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 icons">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 icons headerIcons">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-home"></i></a>
                     </li>
@@ -37,17 +37,150 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-compass"></i></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-heart"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
+<body class="scroll">
 
-<body>
+<div id="splash" class="splash">
+    <div class="login">
+        <p>Test Accaunt</p>
+        <p>lgon: test1@gmmail.com</p>
+        <p>pass: test1</p>
+        <form id="login-form">
+            <div class="form-group row">
+                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" name="username" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" name="password" class="form-control" id="inputPassword"
+                           placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Log in</button>
+                </div>
+            </div>
+        </form>
+        <button class="btn btn-primary" onclick="hideSplashScreen()">Sign in</button>
+    </div>
+</div>
+
+<div class="container addNewPostForm">
+    <!-- Button to Open the Modal -->
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+        Add new Post Form
+    </button>
+
+
+    <!-- The Modal -->
+    <form id="newPostId" class="postAddingForm" enctype="multipart/form-data">
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">New Post Form</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div>
+                            <label for="imageForForm" class="custom-file-upload">Upload Image</label>
+                            <input type="file" name="image" id="imageForForm" class="form-control" required
+                                   accept="image/*">
+                        </div>
+                        <div>
+                            <input type="hidden" name="idUser" value="${user.id}}">
+                        </div>
+                        <div>
+                            <label for="desc">Description</label>
+                            <textarea class="form-control textarea" id="desc" name="desc" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<main>
+    <div class="posts">
+
+        <!--        <div class="post post-container" id="post0">-->
+        <!--            <div class="post-header">-->
+
+        <!--                <img src="images/avatar.jpg" class="user-avatar" alt="Avatar of User"/>-->
+        <!--                <div class="user-info">-->
+        <!--                    <span class="post-author">Anako</span>-->
+        <!--                    <span class="photo-location">Black Rock City</span>-->
+        <!--                </div>-->
+
+        <!--            </div>-->
+
+        <!--            <div class="post-image">-->
+        <!--                <div class="likeOnImage" hidden><i class="fas fa-heart" style="color: red"></i></div>-->
+        <!--                <img src="images/pos.jpg" alt="postPhoto" width="700" height="700">-->
+        <!--            </div>-->
+        <!--            <div class="post-footer">-->
+        <!--                <i class="far fa-heart post-heart under_post_footer"></i>-->
+        <!--                <i class="far fa-comment under_post_footer"></i>-->
+        <!--                <i class="far fa-paper-plane under_post_footer"></i>-->
+        <!--                <i class="far fa-bookmark save under_post_footer"></i>-->
+        <!--            </div>-->
+
+        <!--            <div class="post-desc">-->
+        <!--                <p><span style="font-weight: bold"> Anako: </span> Aмериканская корпорация, специализирующаяся на-->
+        <!--                    производстве путевых машин для строительства, текущего содержания и ремонта железнодорожных путей.-->
+        <!--                    Полное</p>-->
+        <!--            </div>-->
+
+        <!--            <div class="post-comments">-->
+        <!--                <li>-->
+        <!--                    <span style="font-weight: bold">Putin V:</span> Where are you?-->
+        <!--                </li>-->
+        <!--            </div>-->
+
+        <!--            <div class="new-comment-form" hidden>-->
+        <!--                <form>-->
+        <!--                    <label>-->
+        <!--                        <input class="newComment" placeholder="new Comment" type="text"-->
+        <!--                               name="newComment">-->
+        <!--                    </label>-->
+        <!--                    <div>-->
+        <!--                        <input type="hidden" name="idUser" value="${user.id}}">-->
+        <!--                    </div>-->
+        <!--                    <div>-->
+        <!--                        <input type="hidden" name="idPost" value="${post.id}}">-->
+        <!--                    </div>-->
+        <!--                    <button type="submit" class="btn btn-primary">Save</button>-->
+        <!--                </form>-->
+        <!--            </div>-->
+
+        <!--        </div>-->
+
+    </div>
+</main>
+
+
 <script src="js/jquery-3.2.1.slim.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
