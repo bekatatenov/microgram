@@ -237,6 +237,7 @@ function addPost(postElement) {
 }
 
 if (localStorage.getItem('user')) {
+    createLogOutHeader(restoreUser());
     hideSplashScreen();
 }
 
